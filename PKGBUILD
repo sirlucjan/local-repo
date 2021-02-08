@@ -1,19 +1,29 @@
-# Maintainer: ushi <ushi@porkbox.net>
-pkgname=local-repo
-pkgver=1.6.6
+# Maintainer: Piotr Górski <lucjan.lucjanov@gmail.com>
+# Contributor: ushi <ushi@porkbox.net>
+
+pkgname=local-repo-git
+_pkgname=local-repo
+pkgver=1.6.5.5.g5b648b0
 pkgrel=1
 pkgdesc="Local repository manager"
 arch=('any')
-url="http://ushi.wurstcase.net/local-repo/"
+url="https://github.com/sirlucjan/local-repo/"
 license=('GPL')
 depends=('pacman' 'python>=3.3')
 makedepends=('gettext')
+provides=('local-repo')
+conflitcs=('local-repo')
 install=local-repo.install
-source=("https://github.com/downloads/ushis/local-repo/local-repo-${pkgver}.tar.gz")
-md5sums=('a0f7e5e5cb1684b9921aafe3fdc6dcfd')
+source=("git://github.com/sirlucjan/local-repo.git")
+md5sums=('SKIP')
+
+pkgver() {
+  cd ${_pkgname}
+  git describe --tags --long | sed 's/^v//;s/-/./g'
+}
 
 package() {
-  cd "${srcdir}/${pkgname}"
+  cd ${_pkgname}
   python setup.py install --prefix="${pkgdir}/usr"
   install -D -m644 bash-completion "${pkgdir}/usr/share/bash-completion/completions/local-repo"
   install -D -m644 share/config.example "${pkgdir}/usr/share/local-repo/config.example"
