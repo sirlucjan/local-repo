@@ -143,3 +143,6 @@ Happy translating!
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# The local-repo was added for testing purposes only and this application will not be developed.
+# A huge thank you to the developer and contributors for their efforts in developing the program.
